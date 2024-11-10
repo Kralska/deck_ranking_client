@@ -1,0 +1,24 @@
+<p>decks works!</p>
+<mat-table [dataSource]="dataSource">
+    <!-- Deck Name Definition -->
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+    </ng-container>
+
+    <!-- Owner Id Definition -->
+    <ng-container matColumnDef="owner_id">
+        <mat-header-cell *matHeaderCellDef> Owner ID </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.owner_id}}</mat-cell>
+    </ng-container>
+
+    <!-- Commander Definition-->
+    <ng-container matColumnDef="commander">
+        <mat-header-cell *matHeaderCellDef> Commander </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.commander}}</mat-cell>
+    </ng-container>
+
+    <!-- Header and Row declarations -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
