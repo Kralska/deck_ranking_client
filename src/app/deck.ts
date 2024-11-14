@@ -1,8 +1,10 @@
+import { User } from "./user";
+
 export interface Deck {
     id: Number,
     name: String,
     commander: String,
-    owner_id: Number,
+    owner: User,
     placements: Number[],
     ratings: Number[]
 }

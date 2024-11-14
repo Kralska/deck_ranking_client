@@ -1,11 +1,12 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Injectable, ViewChild } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon';
+import { DataSource } from '@angular/cdk/collections';
 import { Deck } from '../deck';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 export const ELEMENT_DATA: Deck[] = [
-  {id: 1, name: "Kambal Tokens", commander: "Kambal, Profiteering Mayor", owner_id: 1, placements: [], ratings: []}
+  {id: 1, name: "Kambal Tokens", commander: "Kambal, Profiteering Mayor", owner: {id: 1}, placements: [], ratings: []}
 ];
 
 @Component({
@@ -15,15 +16,21 @@ export const ELEMENT_DATA: Deck[] = [
   templateUrl: './decks.component.html',
   styleUrl: './decks.component.css'
 })
+@Injectable({providedIn: 'root'})
 export class DecksComponent {
-  data = new BehaviorSubject<Deck[]>(ELEMENT_DATA);
+  data: Observable<Deck[]>;
   
   displayedColumns : string[] = ['name', 'owner_id', 'commander'];
-  dataSource = ELEMENT_DATA;
+  dataSource;
 
   connect(): Observable<Deck[]> {
     return this.data;
   }
 
   disconnect() {}
+
+  constructor(private http: HttpClient){
+    this.data = http.get<Deck[]>('http://localhost:8080/api/decks');
+    this.dataSource = this.data;
+  }
 }
