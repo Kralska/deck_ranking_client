@@ -4,7 +4,7 @@ export interface Deck {
     id: Number,
     name: String,
     commander: String,
-    owner: User,
+    owner: Number,
     placements: Number[],
     ratings: Number[]
 }

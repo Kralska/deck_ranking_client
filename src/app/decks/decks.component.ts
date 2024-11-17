@@ -4,10 +4,9 @@ import { DataSource } from '@angular/cdk/collections';
 import { Deck } from '../deck';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-
-export const ELEMENT_DATA: Deck[] = [
-  {id: 1, name: "Kambal Tokens", commander: "Kambal, Profiteering Mayor", owner: {id: 1}, placements: [], ratings: []}
-];
+import { DeckService } from '../services/deck.service';
+import { UserService } from '../services/user.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-decks',
@@ -18,19 +17,11 @@ export const ELEMENT_DATA: Deck[] = [
 })
 @Injectable({providedIn: 'root'})
 export class DecksComponent {
-  data: Observable<Deck[]>;
-  
+
   displayedColumns : string[] = ['name', 'owner_id', 'commander'];
-  dataSource;
+  dataSource: Observable<Deck[]>;
 
-  connect(): Observable<Deck[]> {
-    return this.data;
-  }
-
-  disconnect() {}
-
-  constructor(private http: HttpClient){
-    this.data = http.get<Deck[]>('http://localhost:8080/api/decks');
-    this.dataSource = this.data;
+  constructor(private decks: DeckService, protected users: UserService){
+    this.dataSource = decks.getDecks();
   }
 }

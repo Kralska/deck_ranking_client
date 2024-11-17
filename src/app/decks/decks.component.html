@@ -8,8 +8,8 @@
 
     <!-- Owner Id Definition -->
     <ng-container matColumnDef="owner_id">
-        <mat-header-cell *matHeaderCellDef> Owner ID </mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.owner.id}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef> Owner </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{users.getUser(element.owner)?.username}}</mat-cell>
     </ng-container>
 
     <!-- Commander Definition-->
