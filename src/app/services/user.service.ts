@@ -16,6 +16,10 @@ export class UserService {
     this.httpUsers.subscribe(this.users);
   }
 
+  getUsers() : Observable<User[]> {
+    return this.httpUsers;
+  }
+
   subscribeToAllUsers(observer: Partial<Observer<User[]>> | ((value: User[]) => void)): void{
     this.users.subscribe(observer);
   }
@@ -30,5 +34,9 @@ export class UserService {
 
   getUser(id: Number) : User | undefined {
     return this.users.getValue().find((user: User) => user.id == id)
+  }
+
+  getFullUser(id: Number) : Observable<User> {
+    return this.http.get<User>('http://localhost:8080/api/users/' + id);
   }
 }

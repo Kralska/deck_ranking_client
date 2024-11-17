@@ -3,13 +3,13 @@
     <!-- Deck Name Definition -->
     <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+        <mat-cell *matCellDef="let element"><a [routerLink]="['/decks', element.id]">{{element.name}}</a></mat-cell>
     </ng-container>
 
     <!-- Owner Id Definition -->
     <ng-container matColumnDef="owner_id">
         <mat-header-cell *matHeaderCellDef> Owner </mat-header-cell>
-        <mat-cell *matCellDef="let element">{{users.getUser(element.owner)?.username}}</mat-cell>
+        <mat-cell *matCellDef="let element"><a [routerLink]="['/users', element.owner]"> {{users.getUser(element.owner)?.username}}</a></mat-cell>
     </ng-container>
 
     <!-- Commander Definition-->

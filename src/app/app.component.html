@@ -1,1 +1,10 @@
-<app-decks></app-decks>
+<mat-toolbar>
+    <a mat-button>
+        Magic Deck Elo
+    </a>
+    <a mat-button routerLink="/decks" routerLinkActive="active">Decks</a>
+    <a mat-button routerLink="/users" routerLinkActive="active">Users</a>
+
+</mat-toolbar>
+<!-- The routed views render in the <router-outlet>-->
+<router-outlet></router-outlet>

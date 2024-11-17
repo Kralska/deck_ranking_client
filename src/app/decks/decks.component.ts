@@ -7,11 +7,12 @@ import { HttpClient } from '@angular/common/http';
 import { DeckService } from '../services/deck.service';
 import { UserService } from '../services/user.service';
 import { AsyncPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-decks',
   standalone: true,
-  imports: [ MatTableModule],
+  imports: [ MatTableModule, RouterLink],
   templateUrl: './decks.component.html',
   styleUrl: './decks.component.css'
 })

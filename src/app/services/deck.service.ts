@@ -18,4 +18,8 @@ export class DeckService {
     return this.decks;
   }
 
+  getFullDeck(id: Number): Observable<Deck>{
+    return this.http.get<Deck>('http://localhost:8080/api/decks/' + id);
+  }
+
 }

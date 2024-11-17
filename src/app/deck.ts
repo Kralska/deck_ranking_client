@@ -1,5 +1,3 @@
-import { User } from "./user";
-
 export interface Deck {
     id: Number,
     name: String,

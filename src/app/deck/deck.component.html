@@ -1,0 +1,4 @@
+<h1> Deck</h1>
+<p> Id: {{(deck$ | async)?.id}}</p>
+<p> Name: {{(deck$ | async)?.name}}</p>
+<a [routerLink]="['/users', (deck$ | async)?.owner]"> Owner: {{userService.getUser((deck$ | async)?.owner ?? 0)?.username}}</a>
