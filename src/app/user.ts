@@ -1,5 +1,4 @@
 export interface User {
-    id: Number,
-    username: String,
-    podRoles: String[]
+    id?: Number,
+    username: String
 }

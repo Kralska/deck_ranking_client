@@ -8,11 +8,12 @@ import { DeckService } from '../services/deck.service';
 import { UserService } from '../services/user.service';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { UserAddComponent } from "../user-add/user-add.component";
 
 @Component({
   selector: 'app-decks',
   standalone: true,
-  imports: [ MatTableModule, RouterLink],
+  imports: [MatTableModule, RouterLink, UserAddComponent],
   templateUrl: './decks.component.html',
   styleUrl: './decks.component.css'
 })

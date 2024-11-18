@@ -24,6 +24,11 @@ export class UserService {
     this.users.subscribe(observer);
   }
 
+  addUser(user: User){
+      this.http.post<User>('http://localhost:8080/api/users', user).subscribe(console.log);
+      this.refreshUsers();
+  }
+
   refreshUsers(): void {
     this.httpUsers.subscribe();
   }

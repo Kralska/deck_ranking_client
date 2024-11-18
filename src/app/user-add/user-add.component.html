@@ -1,0 +1,11 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+        <mat-label for="id">Id: </mat-label>
+        <input matInput for="id" type="text" formControlName="id">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label for="username">Name: </mat-label>
+        <input matInput for="username" type="text" formControlName="username">
+    </mat-form-field>
+    <button mat-stroked-button type="submit" [disabled]="!userForm.valid">Submit</button>
+</form>
