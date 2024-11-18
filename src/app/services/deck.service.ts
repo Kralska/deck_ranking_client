@@ -22,4 +22,12 @@ export class DeckService {
     return this.http.get<Deck>('http://localhost:8080/api/decks/' + id);
   }
 
+  addDeck(deck: Deck) {
+    this.http.post<User>('http://localhost:8080/api/decks', deck).subscribe(console.log);
+    this.refresh();
+  }
+
+  refresh() {
+    this.decks.subscribe();
+  }
 }
