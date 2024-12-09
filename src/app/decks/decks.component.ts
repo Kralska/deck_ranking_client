@@ -16,8 +16,8 @@ import { MatDialog } from '@angular/material/dialog';
   imports: [
     MatTableModule,
     MatButtonModule,
-    RouterLink,
-    UserAddComponent],
+    RouterLink
+  ],
   templateUrl: './decks.component.html',
   styleUrl: './decks.component.css'
 })
@@ -27,12 +27,12 @@ export class DecksComponent {
   dataSource: Observable<Deck[]>;
 
   readonly dialog = inject(MatDialog);
+  
+  constructor(protected deckService: DeckService, protected users: UserService){
+    this.dataSource = deckService.getDecks();
+  }
 
   promptAddDeck(){
     const dialogRef = this.dialog.open(DeckAddComponent)
-  }
-
-  constructor(private decks: DeckService, protected users: UserService){
-    this.dataSource = decks.getDecks();
   }
 }

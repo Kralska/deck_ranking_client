@@ -28,6 +28,6 @@ export class DeckService {
   }
 
   refresh() {
-    this.decks.subscribe();
+    this.decks.subscribe(console.log);
   }
 }

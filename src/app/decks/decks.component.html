@@ -1,4 +1,5 @@
 <button mat-raised-button (click)="promptAddDeck()"> New Deck </button>
+<button mat-raised-button (click)="deckService.refresh()"> Refresh</button>
 <mat-table [dataSource]="dataSource">
     <!-- Deck Name Definition -->
     <ng-container matColumnDef="name">
