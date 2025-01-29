@@ -1,11 +1,9 @@
-import { Component, inject, Injectable, ViewChild } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
+import { Component, inject, OnInit } from '@angular/core';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Deck } from '../deck';
-import { Observable } from 'rxjs';
 import { DeckService } from '../services/deck.service';
 import { UserService } from '../services/user.service';
 import { RouterLink } from '@angular/router';
-import { UserAddComponent } from "../user-add/user-add.component";
 import { MatButtonModule } from '@angular/material/button';
 import { DeckAddComponent } from '../deck-add/deck-add.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -21,15 +19,19 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './decks.component.html',
   styleUrl: './decks.component.css'
 })
-@Injectable({providedIn: 'root'})
-export class DecksComponent {
-  displayedColumns : string[] = ['name', 'owner_id', 'commander'];
-  dataSource: Observable<Deck[]>;
+export class DecksComponent implements OnInit{
+  displayedColumns : string[] = ['name', 'owner_id', 'commander', 'rating'];
+  dataSource: MatTableDataSource<Deck> = new MatTableDataSource<Deck>([]);
 
   readonly dialog = inject(MatDialog);
   
   constructor(protected deckService: DeckService, protected users: UserService){
-    this.dataSource = deckService.getDecks();
+  }
+
+  ngOnInit(): void {
+    this.deckService.getDecks().subscribe(
+      decks => this.dataSource = new MatTableDataSource<Deck>(decks)
+    );
   }
 
   promptAddDeck(){

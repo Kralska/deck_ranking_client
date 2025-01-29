@@ -1,8 +1,15 @@
 import { FormControl, FormGroup, Validators } from "@angular/forms"
 
 export interface Deck {
-    name: String,
-    owner: Number
-    id?: Number,
-    commander?: String,
+    name?: string,
+    owner?: number
+    id: number,
+    commander?: string,
+    rating: number
 };
+
+export interface NewDeck {
+    name : string,
+    owner: number,
+    commander: string
+}

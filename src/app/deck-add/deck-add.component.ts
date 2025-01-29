@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Deck } from '../deck';
+import { Deck, NewDeck } from '../deck';
 import { DeckService } from '../services/deck.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
@@ -38,11 +38,10 @@ export class DeckAddComponent {
     protected userService: UserService) { }
 
   onSubmit() {
-    let deck: Deck = {
-      id: undefined,
-      name: this.deckForm.value.name ?? '',
-      commander: this.deckForm.value.commander ?? '',
-      owner: this.deckForm.value.owner?? 0
+    let deck: NewDeck = {
+      name: this.deckForm.value.name as string ?? '',
+      commander: this.deckForm.value.commander as string ?? '',
+      owner: this.deckForm.value.owner as number ?? 0
     };
     this.deckService.addDeck(deck);
 

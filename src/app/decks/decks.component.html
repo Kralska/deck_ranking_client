@@ -1,5 +1,5 @@
 <button mat-raised-button (click)="promptAddDeck()"> New Deck </button>
-<button mat-raised-button (click)="deckService.refresh()"> Refresh</button>
+<!--<button mat-raised-button (click)="deckService.refresh()"> Refresh</button>-->
 <mat-table [dataSource]="dataSource">
     <!-- Deck Name Definition -->
     <ng-container matColumnDef="name">
@@ -15,8 +15,14 @@
 
     <!-- Commander Definition-->
     <ng-container matColumnDef="commander">
-        <mat-header-cell *matHeaderCellDef> Commander </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Commander</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.commander}}</mat-cell>
+    </ng-container>
+
+    <!-- Rating Definition-->
+    <ng-container matColumnDef="rating" >
+        <mat-header-cell *matHeaderCellDef>Rating</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.rating}}</mat-cell>
     </ng-container>
 
     <!-- Header and Row declarations -->
