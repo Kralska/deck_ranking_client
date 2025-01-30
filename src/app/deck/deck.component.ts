@@ -7,11 +7,10 @@ import { AsyncPipe } from '@angular/common';
 import { UserService } from '../services/user.service';
 
 @Component({
-  selector: 'app-deck',
-  standalone: true,
-  imports: [RouterLink],
-  templateUrl: './deck.component.html',
-  styleUrl: './deck.component.scss'
+    selector: 'app-deck',
+    imports: [RouterLink],
+    templateUrl: './deck.component.html',
+    styleUrl: './deck.component.scss'
 })
 export class DeckComponent {
   id: Number;

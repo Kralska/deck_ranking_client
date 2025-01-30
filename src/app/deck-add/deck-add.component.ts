@@ -11,18 +11,17 @@ import { UserService } from '../services/user.service';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-deck-add',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatButtonModule,
-    AsyncPipe
-  ],
-  templateUrl: './deck-add.component.html',
-  styleUrl: './deck-add.component.scss'
+    selector: 'app-deck-add',
+    imports: [
+        ReactiveFormsModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatButtonModule,
+        AsyncPipe
+    ],
+    templateUrl: './deck-add.component.html',
+    styleUrl: './deck-add.component.scss'
 })
 export class DeckAddComponent {
   deckForm = new FormGroup({

@@ -6,11 +6,10 @@ import { UserService } from '../services/user.service';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-user',
-  standalone: true,
-  imports: [AsyncPipe],
-  templateUrl: './user.component.html',
-  styleUrl: './user.component.scss'
+    selector: 'app-user',
+    imports: [AsyncPipe],
+    templateUrl: './user.component.html',
+    styleUrl: './user.component.scss'
 })
 export class UserComponent {
   user$: Observable<User>;

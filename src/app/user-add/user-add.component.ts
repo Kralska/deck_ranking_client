@@ -8,16 +8,15 @@ import { UserService } from '../services/user.service';
 import { User } from '../user';
 
 @Component({
-  selector: 'app-user-add',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule, 
-    MatInputModule, 
-    MatFormFieldModule, 
-    MatButtonModule
-  ],
-  templateUrl: './user-add.component.html',
-  styleUrl: './user-add.component.scss'
+    selector: 'app-user-add',
+    imports: [
+        ReactiveFormsModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatButtonModule
+    ],
+    templateUrl: './user-add.component.html',
+    styleUrl: './user-add.component.scss'
 })
 export class UserAddComponent {
   userForm = new FormGroup({

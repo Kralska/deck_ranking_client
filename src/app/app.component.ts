@@ -7,16 +7,15 @@ import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    CommonModule, RouterOutlet, RouterLink, RouterLinkActive,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    imports: [
+        CommonModule, RouterOutlet, RouterLink, RouterLinkActive,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule
+    ],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'deck_ranking_client';

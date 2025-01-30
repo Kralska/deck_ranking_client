@@ -9,15 +9,14 @@ import { DeckAddComponent } from '../deck-add/deck-add.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-decks',
-  standalone: true,
-  imports: [
-    MatTableModule,
-    MatButtonModule,
-    RouterLink
-  ],
-  templateUrl: './decks.component.html',
-  styleUrl: './decks.component.scss'
+    selector: 'app-decks',
+    imports: [
+        MatTableModule,
+        MatButtonModule,
+        RouterLink
+    ],
+    templateUrl: './decks.component.html',
+    styleUrl: './decks.component.scss'
 })
 export class DecksComponent implements OnInit{
   displayedColumns : string[] = ['name', 'owner_id', 'commander', 'rating'];

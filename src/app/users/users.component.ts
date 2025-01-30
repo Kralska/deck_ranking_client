@@ -9,11 +9,10 @@ import { UserAddComponent } from '../user-add/user-add.component';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-users',
-  standalone: true,
-  imports: [MatTableModule, RouterLink, MatButtonModule],
-  templateUrl: './users.component.html',
-  styleUrl: './users.component.scss'
+    selector: 'app-users',
+    imports: [MatTableModule, RouterLink, MatButtonModule],
+    templateUrl: './users.component.html',
+    styleUrl: './users.component.scss'
 })
 export class UsersComponent {
   displayedColumns: string[] = ['name']
