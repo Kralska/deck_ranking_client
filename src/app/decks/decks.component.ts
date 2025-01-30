@@ -17,7 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
     RouterLink
   ],
   templateUrl: './decks.component.html',
-  styleUrl: './decks.component.css'
+  styleUrl: './decks.component.scss'
 })
 export class DecksComponent implements OnInit{
   displayedColumns : string[] = ['name', 'owner_id', 'commander', 'rating'];

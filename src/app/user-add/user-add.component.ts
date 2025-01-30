@@ -17,7 +17,7 @@ import { User } from '../user';
     MatButtonModule
   ],
   templateUrl: './user-add.component.html',
-  styleUrl: './user-add.component.css'
+  styleUrl: './user-add.component.scss'
 })
 export class UserAddComponent {
   userForm = new FormGroup({

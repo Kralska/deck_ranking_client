@@ -10,7 +10,7 @@ import { AsyncPipe } from '@angular/common';
   standalone: true,
   imports: [AsyncPipe],
   templateUrl: './user.component.html',
-  styleUrl: './user.component.css'
+  styleUrl: './user.component.scss'
 })
 export class UserComponent {
   user$: Observable<User>;

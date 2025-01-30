@@ -11,7 +11,7 @@ import { UserService } from '../services/user.service';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './deck.component.html',
-  styleUrl: './deck.component.css'
+  styleUrl: './deck.component.scss'
 })
 export class DeckComponent {
   id: Number;

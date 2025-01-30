@@ -8,7 +8,7 @@ import { MatListModule } from '@angular/material/list'
     MatListModule
   ],
   templateUrl: './game-card.component.html',
-  styleUrl: './game-card.component.css'
+  styleUrl: './game-card.component.scss'
 })
 export class GameCardComponent {
 

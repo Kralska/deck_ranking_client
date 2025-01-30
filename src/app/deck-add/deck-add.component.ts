@@ -22,7 +22,7 @@ import { AsyncPipe } from '@angular/common';
     AsyncPipe
   ],
   templateUrl: './deck-add.component.html',
-  styleUrl: './deck-add.component.css'
+  styleUrl: './deck-add.component.scss'
 })
 export class DeckAddComponent {
   deckForm = new FormGroup({

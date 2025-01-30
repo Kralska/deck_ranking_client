@@ -6,7 +6,7 @@ import { GameCardComponent } from '../game-card/game-card.component';
   standalone: true,
   imports: [GameCardComponent],
   templateUrl: './games.component.html',
-  styleUrl: './games.component.css'
+  styleUrl: './games.component.scss'
 })
 export class GamesComponent {
 
