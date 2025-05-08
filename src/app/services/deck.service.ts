@@ -1,28 +1,52 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
-import { Deck, NewDeck } from '../deck';
-import { Observable } from 'rxjs';
-import { User } from '../user';
+import { Injectable } from '@angular/core';
+import { Deck } from '../interfaces/deck';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeckService {
   private decks$: Observable<Deck[]>;
+  private decksArray$: BehaviorSubject<Deck[]>;
+
+  private decks: Map<number, Deck> = new Map<number, Deck>();
 
   constructor(private http: HttpClient) { 
     this.decks$ = this.http.get<Deck[]>('http://localhost:8080/api/decks');
+    this.decksArray$ = new BehaviorSubject<Deck[]>([]);
+    this.updateDecks()
   }
 
-  getDecks(): Observable<Deck[]>{ 
-    return this.decks$;
+  getDecks(): BehaviorSubject<Deck[]> { 
+    return this.decksArray$;
   }
 
-  getFullDeck(id: Number): Observable<Deck> {
-    return this.http.get<Deck>('http://localhost:8080/api/decks/' + id);
+  getDeck(id: number) : Deck | undefined{
+    return this.decks.get(id)!;
   }
 
-  addDeck(deck: NewDeck) {
-    this.http.post<User>('http://localhost:8080/api/decks', deck).subscribe(console.log);
+  addDeck(deck: Deck) {
+    this.http.post<Deck>('http://localhost:8080/api/decks', deck).subscribe(deck => {
+      let decks: Deck[] = this.decksArray$.getValue();
+      decks.push(deck);
+      this.decksArray$.next(decks);
+    }
+      
+    );
+  }
+
+  updateDecks() {
+    this.decks$.subscribe(decks => {
+      this.decks.clear();
+      this.decks$.subscribe(newDecks => {
+        newDecks.forEach(deck => {
+          this.decks.set(deck.id!, deck);
+        });
+      })
+      
+      this.decksArray$.next(decks);
+    });
   }
 }

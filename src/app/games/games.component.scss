@@ -1,0 +1,9 @@
+.games-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+
+    gap: 16px;
+
+    place-items: stretch;
+}

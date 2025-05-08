@@ -1,11 +1,14 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-    <mat-form-field>
-        <mat-label for="id">Id: </mat-label>
-        <input matInput for="id" type="text" formControlName="id">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label for="username">Name: </mat-label>
-        <input matInput for="username" type="text" formControlName="username">
-    </mat-form-field>
-    <button mat-stroked-button type="submit" [disabled]="!userForm.valid">Submit</button>
-</form>
+<h1 mat-dialog-title>Add new user</h1>
+
+<mat-dialog-content>
+    <form [formGroup]="userForm">
+        <mat-form-field>
+            <mat-label for="username">Name: </mat-label>
+            <input matInput for="username" type="text" formControlName="username">
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-stroked-button mat-dialog-close (click)="addNewUser()" [disabled]="!userForm.valid">Add</button>
+</mat-dialog-actions>

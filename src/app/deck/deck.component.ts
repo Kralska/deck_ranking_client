@@ -1,24 +1,23 @@
 import { Component } from '@angular/core';
-import { Deck } from '../deck';
-import { Observable } from 'rxjs';
+import { Deck } from '../interfaces/deck';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DeckService } from '../services/deck.service';
-import { AsyncPipe } from '@angular/common';
 import { UserService } from '../services/user.service';
 
 @Component({
+    standalone: true,
     selector: 'app-deck',
     imports: [RouterLink],
     templateUrl: './deck.component.html',
     styleUrl: './deck.component.scss'
 })
 export class DeckComponent {
-  id: Number;
-  deck: Deck | undefined;
+  id: number;
+  deck: Deck;
 
   constructor(private route: ActivatedRoute, private deckService: DeckService, protected userService: UserService){
     this.id = parseInt(this.route.snapshot.paramMap.get('id') ?? '0');
-    deckService.getFullDeck(this.id).subscribe(deck => this.deck = deck);
+    this.deck = deckService.getDeck(this.id)!;
   }
   
 }

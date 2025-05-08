@@ -1,0 +1,13 @@
+.game-card {
+    width: calc(100% - 32px);
+    height: calc(100% - 32px);
+    display:block;
+    
+    padding: 16px;
+
+    box-shadow: var(--mat-sys-level1);
+    background-color: var(--mat-sys-surface-container);
+    color: var(--mat-sys-on-background);
+    border-radius: 12px;
+    font: var(--mat-sys-body-large);
+  }

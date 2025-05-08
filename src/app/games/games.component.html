@@ -1,1 +1,13 @@
-<game-card/>
+<div class="pane">
+    <mat-toolbar>
+        <span>Games</span>
+        <span class="spacer"></span>
+        <button mat-stroked-button (click)="promptAddGame()">Add Game</button>
+    </mat-toolbar>
+    
+    <div class="games-grid">
+        @for(game of games$ | async; track game.id){
+            <game-card [game]="game" />
+        }
+    </div>
+</div>

@@ -1,47 +1,51 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../user';
-import { BehaviorSubject, Observable, Observer } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { User } from '../interfaces/user';
+import { BehaviorSubject, firstValueFrom, Observable, Observer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private httpUsers: Observable<User[]>;
-  private users: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
+  private users$: Observable<User[]>;
+  private userArray$: BehaviorSubject<User[]>;
+  private users: Map<number, User> = new Map<number, User>();
 
   constructor(private http: HttpClient) {
-    this.httpUsers = http.get<User[]>('http://localhost:8080/api/users');
-    this.httpUsers.subscribe(this.users);
-  }
+    this.userArray$ = new BehaviorSubject<User[]>([]);
 
-  getUsers() : Observable<User[]> {
-    return this.httpUsers;
+    this.users$ = http.get<User[]>('http://localhost:8080/api/users');
+    this.updateUsers();
   }
+  
+  updateUsers() {
+    this.users$.subscribe(newUsers => {
+      this.users.clear();
+        newUsers.forEach(user => {
+          this.users.set(user.id!, user)
+        });
 
-  subscribeToAllUsers(observer: Partial<Observer<User[]>> | ((value: User[]) => void)): void{
-    this.users.subscribe(observer);
+        this.userArray$.next(newUsers);
+    });
+  }
+  
+  getUsers() : BehaviorSubject<User[]> {
+    return this.userArray$;
   }
 
   addUser(user: User){
-      this.http.post<User>('http://localhost:8080/api/users', user).subscribe(console.log);
-      this.refreshUsers();
-  }
-
-  refreshUsers(): void {
-    this.httpUsers.subscribe();
+      this.http.post<User>('http://localhost:8080/api/users', user).subscribe(user => {
+        let users: User[] = this.userArray$.getValue();
+        users.push(user);
+        this.userArray$.next(users);
+      });
   }
 
   subscribeToUser(observer: Partial<Observer<User>> | ((value: User) => void), id: Number): void {
     this.http.get<User>('http://localhost:8080/api/users/' + id).subscribe(observer);
   }
 
-  getUser(id: Number) : User | undefined {
-    return this.users.getValue().find((user: User) => user.id == id)
-  }
-
-  getFullUser(id: Number) : Observable<User> {
-    return this.http.get<User>('http://localhost:8080/api/users/' + id);
+  getUser(id: number) : User | undefined {
+    return this.users.get(id);
   }
 }

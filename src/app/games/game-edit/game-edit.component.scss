@@ -1,0 +1,47 @@
+mat-form-field {
+    margin-right: 16px;
+}
+
+.placement {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    
+    padding:10px;
+    border-radius: 16px;
+    margin-top:16px;
+    
+    background-color: var(--mat-sys-surface-container-low);
+    box-shadow: var(--mat-sys-level1);
+
+    :last-child {
+        margin-right: 16px;
+    }
+}
+
+.placement-container {
+    input[type=number] {
+        appearance: textfield;
+        
+        width: 76px;
+        height: 76px;
+        
+        font: var(--mat-sys-body-large);
+        color: var(--mat-sys-on-background);
+        background-color: var(--mat-sys-surface-container-lowest);
+        border: none;
+        border-radius: 38px;
+
+        text-align: center;
+    }
+}
+
+
+.after-list {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

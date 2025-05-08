@@ -1,0 +1,23 @@
+<mat-form-field>
+    <input 
+        #playerInput
+        type="text"
+        placeholder="Pick player"
+        matInput
+        formControlName="player"
+        [matAutocomplete]="userAutocomplete"
+        (input)="filterUsers()"
+        (focus)="filterUsers()">
+    <mat-hint>Player</mat-hint>
+    <!--
+    @if(!placements.at(i).get('player')?.valid){
+        <mat-error>Error</mat-error>
+    }
+    -->
+    <mat-autocomplete #userAutocomplete="matAutocomplete" [displayWith]="displayUserFn"
+        (optionSelected)="onUserSelected($event)" requireSelection autoActiveFirstOption>
+        @for (user of filteredUsers; track user.id) {
+        <mat-option [value]="user">{{user.username}}</mat-option>
+        }
+    </mat-autocomplete>
+</mat-form-field>

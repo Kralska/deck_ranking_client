@@ -2,7 +2,6 @@
     <h1> Deck</h1>
     <p> Id: {{deck.id}}</p>
     <p> Name: {{deck.name}}</p>
-    <a [routerLink]="['/users', deck.owner]"> Owner: {{userService.getUser(deck.owner ?? 0)?.username}}</a>
     <p> Rating: 50</p>
 }
 @else {

@@ -1,0 +1,106 @@
+<h1 mat-dialog-title>Enter played game</h1>
+
+<mat-dialog-content>
+    <form [formGroup]="gameForm">
+
+        <!-- Time and Date-->
+        <mat-form-field>
+            <mat-label>Game played on</mat-label>
+            <input matInput [matDatepicker]="datepicker" formControlName="playedAtDate">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>at</mat-label>
+            <input matInput [matTimepicker]="timepicker" formControlName="playedAtTime">
+            <mat-timepicker #timepicker />
+            <mat-timepicker-toggle [for]="timepicker" matSuffix />
+        </mat-form-field>
+
+        <h2>Placements</h2>
+        <div class="placement-ordering" formArrayName="placements">
+
+            @for(placementControl of placements.controls; track placementControl; 
+                    let i = $index) {
+
+            <form class="placement" [formGroupName]="i">
+                <!-- position -->
+                <div class="placement-container">
+                    <input #positionInput type="number" matInput class="placement-input" formControlName="position"
+                        (change)="reorderPlacements()">
+                </div>
+
+                <!-- deck -->
+                <mat-form-field >
+                    <input 
+                        #deckInput
+                        type="text"
+                        placeholder="Pick deck"
+                        matInput
+                        formControlName="deck" 
+                        [matAutocomplete]="decksAutocomplete"
+                        (input)="filterDecks(i)"
+                        (focus)="filterDecks(i)" >
+                    <mat-hint>Deck</mat-hint>
+                    @if(!placements.at(i).get('deck')?.valid){
+                        <mat-error>Error</mat-error>
+                    }
+                    <mat-autocomplete #decksAutocomplete="matAutocomplete" [displayWith]="displayDeckFn"
+                        (optionSelected)="onDeckSelected(i, $event)" requireSelection autoActiveFirstOption>
+                        @for (deck of filteredDecks[i]; track deck) {
+                        <mat-option [value]="deck">{{deck.name}}</mat-option>
+                        }
+                    </mat-autocomplete>
+
+                </mat-form-field>
+
+                <!-- player -->
+                <mat-form-field>
+                    <input 
+                        #playerInput
+                        type="text"
+                        placeholder="Pick player"
+                        matInput
+                        formControlName="player"
+                        [matAutocomplete]="userAutocomplete"
+                        (input)="filterUsers(i)"
+                        (focus)="filterUsers(i)">
+                    <mat-hint>Player</mat-hint>
+                    @if(!placements.at(i).get('player')?.valid){
+                        <mat-error>Error</mat-error>
+                    }
+                    <mat-autocomplete #userAutocomplete="matAutocomplete" [displayWith]="displayUserFn"
+                        (optionSelected)="onUserSelected(i, $event)" requireSelection autoActiveFirstOption>
+                        @for (user of filteredUsers[i]; track user.id) {
+                        <mat-option [value]="user">{{user.username}}</mat-option>
+                        }
+                    </mat-autocomplete>
+                </mat-form-field>
+
+
+                <!-- Removal button -->
+                <button mat-icon-button (click)="$event.preventDefault(); deletePlacement($index)" type="button">
+                    <mat-icon>delete</mat-icon>
+                </button>
+
+            </form>
+            }
+
+            <!-- Add new placement button at bottom of placement list-->
+            <div class="after-list">
+                <button mat-icon-button (click)="addNewPlacement()" type="button">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+    <button mat-stroked-button mat-dialog-close>Cancel</button>
+    <button mat-stroked-button mat-dialog-close (click)="onChangeComplete()" [disabled]="!gameForm.valid">Save</button>
+
+</mat-dialog-actions>

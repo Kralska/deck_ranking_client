@@ -1,24 +1,21 @@
 import { Component } from '@angular/core';
-import { User } from '../user';
-import { Observable } from 'rxjs';
+import { User } from '../interfaces/user';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user.service';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
+    standalone: true,
     selector: 'app-user',
-    imports: [AsyncPipe],
     templateUrl: './user.component.html',
     styleUrl: './user.component.scss'
 })
 export class UserComponent {
-  user$: Observable<User>;
-  id: Number;
+  user: User | undefined;
+  id: number;
 
   constructor(private route: ActivatedRoute, private userService: UserService){
     this.id = parseInt(this.route.snapshot.paramMap.get('id') ?? '0');
-    this.user$ = userService.getFullUser(this.id);
-    this.user$.subscribe(console.log);
+    this.user = userService.getUser(this.id);
   }
   
 }

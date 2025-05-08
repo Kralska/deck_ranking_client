@@ -1,0 +1,21 @@
+@if(game) {
+    <div class="game-card">
+    
+        <div>Played at: {{game.playedAt | date : 'MM/dd/yyyy'}}</div>
+        <div>Participants: {{game.participants}}</div>
+    
+        <mat-list>
+            
+            @for(placement of game.placements; track placement.deck) {
+                <mat-list-item>
+                    <div matListItemIcon><a></a>{{placement.position}}</div>
+                    <div matListItemTitle><a [routerLink]="['/decks', placement.deck]">{{deckService.getDeck(placement.deck.id!)?.name}}</a></div>
+                    <div matListItemLine>{{deckService.getDeck(placement.deck.id!)?.rating}}</div>
+                </mat-list-item>
+            }
+    
+        </mat-list>
+    
+    </div>
+}
+

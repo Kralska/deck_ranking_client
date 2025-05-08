@@ -1,19 +1,20 @@
-<form [formGroup]="deckForm" (ngSubmit)="onSubmit()">
-    <mat-form-field>
-        <mat-label for="name">Name</mat-label>
-        <input matInput for="name" type="text" formControlName="name">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Owner</mat-label>
-        <mat-select for="owner" formControlName="owner">
-            @for(user of userService.getUsers() | async; track user.id){
-                <mat-option [value]="user.id">{{user.username}}</mat-option>
-            }
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label for="commander">Commander</mat-label>
-        <input matInput for="commander" type="text" formControlName="commander">
-    </mat-form-field>
-    <button mat-raised-button type="submit" [disabled]="!deckForm.valid">Create</button>
-</form>
+<h1 mat-dialog-title>Add new deck</h1>
+
+<mat-dialog-content>
+    <form [formGroup]="deckForm">
+        
+        <mat-form-field>
+            <mat-label for="name">Name</mat-label>
+            <input matInput for="name" type="text" formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="commander">Commander</mat-label>
+            <input matInput for="commander" type="text" formControlName="commander">
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-raised-button (click)="addNewDeck()" [disabled]="!deckForm.valid">Create</button>
+</mat-dialog-actions>
