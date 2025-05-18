@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Deck } from '../interfaces/deck';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { User } from '../interfaces/user';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class DeckService {
   private decks: Map<number, Deck> = new Map<number, Deck>();
 
   constructor(private http: HttpClient) { 
-    this.decks$ = this.http.get<Deck[]>('http://localhost:8080/api/decks');
+    this.decks$ = this.http.get<Deck[]>(environment.serverUrl + '/decks');
     this.decksArray$ = new BehaviorSubject<Deck[]>([]);
     this.updateDecks()
   }
@@ -28,7 +28,7 @@ export class DeckService {
   }
 
   addDeck(deck: Deck) {
-    this.http.post<Deck>('http://localhost:8080/api/decks', deck).subscribe(deck => {
+    this.http.post<Deck>(environment.serverUrl + '/decks', deck).subscribe(deck => {
       let decks: Deck[] = this.decksArray$.getValue();
       decks.push(deck);
       this.decksArray$.next(decks);

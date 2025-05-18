@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user';
 import { BehaviorSubject, firstValueFrom, Observable, Observer } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class UserService {
   constructor(private http: HttpClient) {
     this.userArray$ = new BehaviorSubject<User[]>([]);
 
-    this.users$ = http.get<User[]>('http://localhost:8080/api/users');
+    this.users$ = http.get<User[]>(environment.serverUrl + '/users');
     this.updateUsers();
   }
   
@@ -34,7 +35,7 @@ export class UserService {
   }
 
   addUser(user: User){
-      this.http.post<User>('http://localhost:8080/api/users', user).subscribe(user => {
+      this.http.post<User>(environment.serverUrl + '/users', user).subscribe(user => {
         let users: User[] = this.userArray$.getValue();
         users.push(user);
         this.userArray$.next(users);
@@ -42,7 +43,7 @@ export class UserService {
   }
 
   subscribeToUser(observer: Partial<Observer<User>> | ((value: User) => void), id: Number): void {
-    this.http.get<User>('http://localhost:8080/api/users/' + id).subscribe(observer);
+    this.http.get<User>(environment.serverUrl + '/users/' + id).subscribe(observer);
   }
 
   getUser(id: number) : User | undefined {

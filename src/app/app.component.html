@@ -5,6 +5,12 @@
     <a mat-flat-button routerLink="/decks" routerLinkActive="active">Decks</a>
     <a mat-flat-button routerLink="/users" routerLinkActive="active">Users</a>
     <a mat-flat-button routerLink="/games" routerLinkActive="active">Games</a>
+    <span class="spacer"></span>
+    @if (!authenticated) {
+      <button mat-flat-button (click)="login()">Login</button>
+    } @else {
+      <button mat-flat-button (click)="logout()">Logout</button>
+    }
 
 </mat-toolbar>
 <!-- The routed views render in the <router-outlet>-->
