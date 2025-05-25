@@ -17,7 +17,7 @@ export const provideKeycloakServer = () =>
     config: {
       realm: 'deck-ranking',
       url: 'http://localhost:8211',
-      clientId: 'deck-ranking-webapp'
+      clientId: 'webapp'
     },
     initOptions: {
       onLoad: 'check-sso',
