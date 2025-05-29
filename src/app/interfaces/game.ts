@@ -3,7 +3,8 @@ import { Deck } from "./deck"
 export interface GamePlacement {
     game: Game,
     deck: Deck,
-    position: number
+    position: number,
+    rating: Number
 }
 
 export interface Game {

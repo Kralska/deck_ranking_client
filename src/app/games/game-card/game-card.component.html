@@ -9,8 +9,8 @@
             @for(placement of game.placements; track placement.deck) {
                 <mat-list-item>
                     <div matListItemIcon><a></a>{{placement.position}}</div>
-                    <div matListItemTitle><a [routerLink]="['/decks', placement.deck]">{{deckService.getDeck(placement.deck.id!)?.name}}</a></div>
-                    <div matListItemLine>{{deckService.getDeck(placement.deck.id!)?.rating}}</div>
+                    <div matListItemTitle><a [routerLink]="['/decks', placement.deck]">{{placement.deck.name}}</a></div>
+                    <div matListItemLine>{{placement?.rating}}</div>
                 </mat-list-item>
             }
     
