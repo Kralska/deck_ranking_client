@@ -40,7 +40,7 @@ export class DeckAddComponent {
       commander: this.deckForm.value.commander || undefined,
       rating: 1000 // Dummy for adding
     }
-    this.deckService.addDeck(newDeck);
+    this.deckService.createDeck(newDeck);
 
     this.dialogRef.close();
   }

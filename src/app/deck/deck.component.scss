@@ -1,0 +1,64 @@
+.supporting-pane-base {
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    height:fit-content
+}
+
+.main-pane {
+    min-height: 100%;
+    height: fit-content;
+}
+
+.supporting-pane {
+    min-height: 100%;
+    height: fit-content;
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, calc(25% - 9px));
+    grid-template-rows: max-content;
+    height: fit-content;
+    gap: 12px;
+}
+
+.commander {
+    grid-column-end: span 3;
+    display: flex;
+    flex-flow: row;
+
+    >img {
+        right: 0px;
+        top:0px;
+        border-radius: 12px;
+        width: 50%;
+    }
+}
+
+.card {
+    position: relative;
+    height: fit-content;
+
+    box-shadow: var(--mat-sys-level1);
+    background-color: var(--mat-sys-surface-container);
+    color: var(--mat-sys-on-background);
+    border-radius: 12px;
+    font: var(--mat-sys-body-large);
+}
+
+.games {
+    grid-column-end: span 4;
+}
+
+.games-carousel {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    overflow: auto;
+
+}
+
+.sizing-box {
+    width: calc(25% - 9px);
+    flex-shrink: 0;
+}

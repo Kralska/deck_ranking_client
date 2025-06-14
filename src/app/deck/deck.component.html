@@ -1,9 +1,90 @@
-@if (this.deck) {
-    <h1> Deck</h1>
-    <p> Id: {{deck.id}}</p>
-    <p> Name: {{deck.name}}</p>
-    <p> Rating: 50</p>
+@let deck = deck$ | async;
+@if (!deck) {
+    <h1> No deck with id: {{id}}</h1>
 }
 @else {
-    <h1> No deck with id: {{id}}</h1>
+    @let commander = commander$ | async;
+
+    <div class="supporting-pane-base">
+        <div class="main-pane pane">
+            <mat-toolbar>
+                <button mat-icon-button>
+                    <mat-icon>playing_cards</mat-icon>
+                </button>
+                <span>{{deck.name}}</span>
+                <span class="spacer"></span>
+                <button mat-icon-button>
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </mat-toolbar>
+
+            <div class="stat-grid">
+                <!-- Information on commander(card, colors, partner, background, companion)-->
+                <div class="commander card">
+                    @if (commander?.image_uris?.art_crop) {
+                        <img [src]="commander!.image_uris!.art_crop">
+                    }
+                
+                    
+                    <mat-list>
+                        <mat-list-item>
+                            <span matListItemTitle>{{deck.commander}}</span>
+                            <span matListItemLine>Commander</span>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <span matListItemTitle>
+                                @for( color of commander?.color_identity; track color){
+                                    <i [class]="'ms ms-cost ms-' + color.toLocaleLowerCase()"></i> 
+                                }
+                            </span>
+                            <span matListItemLine>Colors</span>
+                        </mat-list-item>
+                        
+                    </mat-list>
+                </div>
+
+                <!-- Bracket information-->
+                 <div class="card">
+                    <mat-list>
+                        <mat-list-item>
+                            <span matListItemTitle>3</span>
+                            <span matListItemLine>Bracket</span>
+                        </mat-list-item>
+                    </mat-list>
+                 </div>
+
+                <!-- Rating information -->
+                 <div class="card rating">
+                    <mat-list>
+                        <mat-list-item>
+                            <span matListItemTitle>{{deck.rating}}</span>
+                            <span matListItemLine>Rating</span>
+                        </mat-list-item>
+                    </mat-list>
+                 </div>
+
+                <!-- Games -->
+                <div class="games">
+                    <mat-toolbar>
+                        <span>Recent games</span>
+                    </mat-toolbar>
+                    <div class="games-carousel">
+                        @let games = games$ | async;
+                        @for (game of games; track $index) {
+                            <div class="sizing-box">
+                                <game-card [game]="game" />
+                            </div>
+                        }
+                    </div>
+
+                </div>
+                
+            </div>
+        </div>  
+
+
+        <div class="pane supporting-pane">
+
+        </div>
+    </div>
 }

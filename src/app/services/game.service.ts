@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Game } from '../interfaces/game';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { Deck } from '../interfaces/deck';
 
 @Injectable({
   providedIn: 'root'
