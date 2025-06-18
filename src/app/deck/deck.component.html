@@ -17,8 +17,10 @@
                     <mat-icon>edit</mat-icon>
                 </button>
             </mat-toolbar>
-
+            
             <div class="stat-grid">
+                @let games = games$ | async;
+
                 <!-- Information on commander(card, colors, partner, background, companion)-->
                 <div class="commander card">
                     @if (commander?.image_uris?.art_crop) {
@@ -60,6 +62,8 @@
                             <span matListItemTitle>{{deck.rating}}</span>
                             <span matListItemLine>Rating</span>
                         </mat-list-item>
+
+                        <app-deck-rating-line-chart [games]="games$" class="line-chart"></app-deck-rating-line-chart>
                     </mat-list>
                  </div>
 
@@ -69,7 +73,6 @@
                         <span>Recent games</span>
                     </mat-toolbar>
                     <div class="games-carousel">
-                        @let games = games$ | async;
                         @for (game of games; track $index) {
                             <div class="sizing-box">
                                 <game-card [game]="game" />

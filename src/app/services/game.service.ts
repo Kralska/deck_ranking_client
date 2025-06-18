@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Game } from '../interfaces/game';
+import { Game, GamePlacement } from '../interfaces/game';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Deck } from '../interfaces/deck';
@@ -46,5 +46,34 @@ export class GameService {
       games.push(game);
       this.gameArray$.next(games);
     });
+  }
+
+  static convertGameResponseToGame(response: any): Game | undefined{
+    let id: number | undefined;
+    let playedAt: Date | undefined;
+    let participants: number | undefined;
+    let placements: [GamePlacement] | undefined;
+    if(response.id){
+      id = response.id;
+    }
+    if(response.playedAt){
+      playedAt = new Date(Date.parse(response.playedAt));
+    }
+    if(response.participants){
+      participants = response.participants;
+    }
+    if(response.placements){
+      placements = response.placements
+    }
+
+    if(!id || !playedAt || !participants || !placements){
+      return undefined;
+    }
+    return {
+      id: id,
+      playedAt: playedAt,
+      participants: participants,
+      placements: placements
+    };
   }
 }

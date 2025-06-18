@@ -14,6 +14,7 @@ import { AsyncPipe } from '@angular/common';
 import { Game } from '../interfaces/game';
 import { GameService } from '../services/game.service';
 import { GameCardComponent } from '../games/game-card/game-card.component';
+import { DeckRatingLineChartComponent } from '../stats/deck-rating-line-chart/deck-rating-line-chart.component';
 
 @Component({
     standalone: true,
@@ -24,7 +25,8 @@ import { GameCardComponent } from '../games/game-card/game-card.component';
       MatListModule,
       MatIconModule,
       AsyncPipe,
-      GameCardComponent
+      GameCardComponent,
+      DeckRatingLineChartComponent
     ],
     templateUrl: './deck.component.html',
     styleUrl: './deck.component.scss'

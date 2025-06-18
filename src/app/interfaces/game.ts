@@ -4,7 +4,7 @@ export interface GamePlacement {
     game: Game,
     deck: Deck,
     position: number,
-    rating: Number
+    rating: number
 }
 
 export interface Game {

@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Deck } from '../interfaces/deck';
-import { BehaviorSubject, defer, Observable, Subscriber } from 'rxjs';
+import { BehaviorSubject, defer, map, Observable, Subscriber } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Game } from '../interfaces/game';
+import { GameService } from './game.service';
 
 @Injectable({
   providedIn: 'root'
@@ -60,7 +61,14 @@ export class DeckService {
   }
 
   fetchGamesWithDeck(deck: Deck): Observable<Game[]> {
-    return this.http.get<Game[]>(environment.serverUrl + "/decks/" + deck.id + "/games");
+    return this.http.get<any[]>(environment.serverUrl + "/decks/" + deck.id + "/games")
+      .pipe(
+        map(games => {
+          return games
+            .map(GameService.convertGameResponseToGame)
+            .filter((game) => game) as Game[]
+        })
+      );
   }
 
   /**

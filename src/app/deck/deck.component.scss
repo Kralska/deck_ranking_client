@@ -62,3 +62,12 @@
     width: calc(25% - 9px);
     flex-shrink: 0;
 }
+
+.rating {
+    grid-column-end: span 4;
+    display: block;
+}
+
+.line-chart {
+    width: 100%;
+}
